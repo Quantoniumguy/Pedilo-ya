@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso/Edición de Productos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contenedor">
+        <header>
+            <h1>Ingreso/Edición de productos</h1>
+            <button class="btn btn-stock">INGRESAR STOCK</button>
+        </header>
+        
+        <div class="formulario-producto">
+            <div class="formulario-izquierda">
+                <div class="subir-imagen">
+                    <label for="imagen-producto" class="imagen-placeholder">+</label>
+                    <input type="file" id="imagen-producto" name="imagen-producto" accept="image/*">
+                    <p>Adjunte una imagen del producto</p>
+                </div>
+            </div>
+            <div class="formulario-derecha">
+                <div class="grupo-formulario">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" required id="fecha" name="fecha">
+                </div>
+                <div class="grupo-formulario">
+                    <label for="categoria">Categoría:</label>
+                    <input type="text" required id="categoria" name="categoria" placeholder="Ingrese una categoría para el producto">
+                </div>
+                <div class="grupo-formulario">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" required id="cantidad" name="cantidad" placeholder="Ingrese la cantidad a ingresar">
+                </div>
+                <div class="grupo-formulario">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" required id="nombre" name="nombre" placeholder="Ingrese un nombre para el producto">
+                </div>
+                <div class="grupo-formulario">
+                    <label for="precio">Precio:</label>
+                    <input type="text" required id="precio" name="precio" placeholder="$0,00">
+                </div>
+                <div class="grupo-formulario">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" placeholder="Ingrese la descripción del producto"></textarea>
+
+                </div>
+            </div>
+        </div>
+        <div class="botones">
+            <button class="btn btn-guardar" onclick="guardarProducto()">GUARDAR</button>
+            <button class="btn btn-descartar" onclick="descartarProducto()">DESCARTAR</button>
+        </div>
+        <div class="lista-productos">
+            <!-- Aquí se mostrarán los productos -->
+        </div>
+        <div class="botones">
+            <button class="btn btn-guardar-cambios">GUARDAR CAMBIOS</button>
+            <button class="btn btn-descartar-cambios">DESCARTAR CAMBIOS</button>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>

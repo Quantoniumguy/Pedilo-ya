@@ -47,9 +47,9 @@ function guardarProducto() {
 
             productoEditando.querySelector('.item-derecha p:nth-child(1)').innerHTML = `<strong>Fecha:</strong> ${fecha}`;
             productoEditando.querySelector('.item-derecha p:nth-child(2)').innerHTML = `<strong>Categoria:</strong> ${categoria}`;
-            productoEditando.querySelector('.item-derecha p:nth-child(3)').innerHTML = `<strong>Cantidad:</strong> ${cantidad}`;
+            productoEditando.querySelector('.item-derecha p:nth-child(3)').innerHTML = `<strong>Cantidad:</strong> ${cantidad} Unidades`;
             productoEditando.querySelector('.item-derecha p:nth-child(4)').innerHTML = `<strong>Nombre:</strong> ${nombre}`;
-            productoEditando.querySelector('.item-derecha p:nth-child(5)').innerHTML = `<strong>Precio:</strong> ${precio}`;
+            productoEditando.querySelector('.item-derecha p:nth-child(5)').innerHTML = `<strong>Precio: </strong> ${precio}`;
             productoEditando.querySelector('.item-derecha p:nth-child(6)').innerHTML = `<strong>Descripcion:</strong> ${descripcion}`;
         } else {
             // Crear nuevo producto
@@ -62,9 +62,9 @@ function guardarProducto() {
                     <div class="item-derecha">
                         <p><strong>Fecha:</strong> ${fecha}</p>
                         <p><strong>Categoría:</strong> ${categoria}</p>
-                        <p><strong>Cantidad:</strong> ${cantidad}</p>
+                        <p><strong>Cantidad:</strong> ${cantidad} Unidades</p>
                         <p><strong>Nombre:</strong> ${nombre}</p>
-                        <p><strong>Precio:</strong> ${precio}</p>
+                        <p><strong>Precio: $</strong> ${precio} Pesos</p>
                         <p><strong>Descripción:</strong> ${descripcion}</p>
                     </div>
                     <div class="icono-editar">
@@ -112,9 +112,7 @@ function editarProducto(element) {
     btnGuardar.textContent = 'GUARDAR CAMBIOS';
 }
 
-function descartarProducto() {
-    limpiarFormulario();
-}
+
 
 function limpiarFormulario() {
     editando = false;
@@ -133,4 +131,8 @@ function limpiarFormulario() {
     // Cambiar texto del botón guardar a su estado inicial
     const btnGuardar = document.querySelector('.btn-guardar');
     btnGuardar.textContent = 'GUARDAR';
+}
+
+function descartarProducto() {
+    limpiarFormulario();
 }

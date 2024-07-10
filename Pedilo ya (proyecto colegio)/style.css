@@ -62,12 +62,14 @@ header h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    object-fit: cover;
 }
 
-.subir-imagen {
+/* .subir-imagen {
     text-align: center;
-}
-
+    object-fit: cover;
+    
+} */
 .imagen-placeholder {
     width: 150px;
     height: 150px;
@@ -78,6 +80,7 @@ header h1 {
     font-size: 50px;
     border-radius: 10px;
     margin-bottom: 10px;
+    background-size: cover;
 }
 
 .formulario-derecha {

@@ -136,3 +136,37 @@ function limpiarFormulario() {
 function descartarProducto() {
     limpiarFormulario();
 }
+
+
+
+document.getElementById('btn-descartar-cambios').addEventListener('click', function() {
+    // Llama a la función para eliminar todos los productos
+    eliminarTodosLosProductos();
+});
+
+function eliminarTodosLosProductos() {
+  
+    const listaProductos = document.querySelector('.lista-productos');
+    
+    listaProductos.innerHTML = '';
+    
+    limpiarFormulario();
+}
+
+function guardarProductos() {
+    const productos = Array.from(document.querySelectorAll('.item-producto')).map(producto => {
+        const imagenUrl = producto.querySelector('.item-izquierda .imagen-placeholder').style.backgroundImage.slice(5, -2);
+        return {
+            fecha: producto.querySelector('.item-derecha p:nth-child(1)').textContent.split(': ')[1],
+            categoria: producto.querySelector('.item-derecha p:nth-child(2)').textContent.split(': ')[1],
+            cantidad: producto.querySelector('.item-derecha p:nth-child(3)').textContent.split(': ')[1],
+            nombre: producto.querySelector('.item-derecha p:nth-child(4)').textContent.split(': ')[1],
+            precio: producto.querySelector('.item-derecha p:nth-child(5)').textContent.split(': ')[1],
+            descripcion: producto.querySelector('.item-derecha p:nth-child(6)').textContent.split(': ')[1],
+            imagen: imagenUrl
+        };
+    });
+
+    localStorage.setItem('productos', JSON.stringify(productos));
+    alert('Productos guardados con éxito');
+}

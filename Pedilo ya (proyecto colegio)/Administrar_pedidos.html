@@ -8,7 +8,9 @@
 </head>
 <body>
     <header>
-        <h1>Panel de Administración</h1>
+        <h1>Pedilo ya</h1>
+        <button class="btn-cerrar">Cerrar</button>
+        <button class="btn-agregar">+ Agregar</button>
     </header>
 
     <div class="contenedor">
@@ -18,7 +20,8 @@
                 <tr>
                     <th>N° Pedido</th>
                     <th>Cliente</th>
-                    <th>Productos</th>
+                    <th>Producto/s</th>
+                    <th>Método de pago</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -27,6 +30,18 @@
                 <!-- Aquí se mostrarán los pedidos realizados por los clientes -->
             </tbody>
         </table>
+    </div>
+
+    <!-- Ventana emergente -->
+    <div class="ventana-emergente" id="ventana-emergente">
+        <div class="ventana-emergente-contenido">
+            <button class="btn-cerrar-ventana">Cerrar</button>
+            <h2>Detalles del pedido</h2>
+            <p id="detalle-id">ID: <span></span></p>
+            <p id="detalle-cliente">Cliente: <span></span></p>
+            <p id="detalle-productos">Productos: <span></span></p>
+            <p id="detalle-metodo-pago">Método de pago: <span></span></p>
+        </div>
     </div>
 
     <script src="admin.js"></script>

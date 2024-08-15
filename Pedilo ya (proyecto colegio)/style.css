@@ -1,21 +1,48 @@
-/* styles.css */
-
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background-color: #e0e0e0;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #1e60ee;
+    background-color: #4e85ff;
     color: #fff;
     padding: 20px;
     text-align: center;
+    position: relative;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header .btn-cerrar {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+header .btn-agregar {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: #1e90ff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 .contenedor {
-    width: 90%;
+    width: 80%;
     margin: 20px auto;
     background-color: #fff;
     padding: 20px;
@@ -25,70 +52,24 @@ header {
 
 h2 {
     margin-top: 0;
-}
-
-.productos-disponibles .producto {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.agregar-carrito {
-    background-color: #1e60ee;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.agregar-carrito:hover {
-    background-color: #3c8eff;
-}
-
-.carrito {
-    margin-top: 20px;
-}
-
-.carrito ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.carrito li {
-    padding: 10px;
-    background-color: #f9f9f9;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#realizar-pedido {
-    background-color: #32752a;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-#realizar-pedido:hover {
-    background-color: #4caf50;
+    text-align: center;
 }
 
 #tabla-pedidos {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
 #tabla-pedidos th, #tabla-pedidos td {
-    padding: 10px;
+    padding: 15px;
     text-align: center;
     border: 1px solid #ddd;
+}
+
+#tabla-pedidos th {
+    background-color: #f5f5f5;
+    font-weight: bold;
 }
 
 .aceptar {
@@ -109,9 +90,9 @@ h2 {
     border-radius: 5px;
 }
 
-.detalles{
+.detalles {
     background-color: #ffe600;
-    color: #fff;
+    color: #333;
     border: none;
     padding: 10px;
     cursor: pointer;
@@ -121,6 +102,59 @@ h2 {
 .notificar {
     background-color: #1e90ff;
     color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Estado */
+
+.estado-pendiente {
+    background-color: #fdfd96;
+}
+
+.estado-aceptado {
+    background-color: #c7e7a5;
+}
+
+.estado-rechazado {
+    background-color: #f7a6a6;
+}
+
+/* Estilo grisado */
+.grisado {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+/* Ventana emergente */
+.ventana-emergente {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.ventana-emergente-contenido {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-cerrar-ventana {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ccc;
+    color: #333;
     border: none;
     padding: 10px;
     cursor: pointer;

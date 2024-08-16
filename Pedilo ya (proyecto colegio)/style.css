@@ -11,6 +11,22 @@ header {
     padding: 20px;
     text-align: center;
     position: relative;
+    
+}
+
+nav{
+    float: right;
+}
+
+nav ul li a{
+    color: white;
+    font-size: 20px;
+}
+
+nav ul li{
+    list-style: none;
+    margin-left: 25px;
+    float: left;
 }
 
 header h1 {
@@ -109,7 +125,6 @@ h2 {
 }
 
 /* Estado */
-
 .estado-pendiente {
     background-color: #fdfd96;
 }
@@ -124,7 +139,7 @@ h2 {
 
 /* Estilo grisado */
 .grisado {
-    background-color: #ccc;
+    background-color: rgb(255, 255, 255);
     color: #666;
     cursor: not-allowed;
 }
@@ -149,7 +164,9 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.btn-cerrar-ventana {
+.btn-cerrar-ventana,
+.btn-cerrar-ventana-crear,
+.btn-cerrar-ventana-advertencia {
     position: absolute;
     top: 10px;
     right: 10px;

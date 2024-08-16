@@ -9,12 +9,17 @@
 <body>
     <header>
         <h1>Pedilo ya</h1>
+        <nav>
+            <ul>
+                <li><a href="Ingresar_productos.html">Ingresar productos</a></li>
+            </ul>
+        </nav>
         <button class="btn-cerrar">Cerrar</button>
-        <button class="btn-agregar">+ Agregar</button>
     </header>
 
     <div class="contenedor">
         <h2>Pedidos</h2>
+        <button class="btn-agregar">+ Agregar</button>
         <table id="tabla-pedidos">
             <thead>
                 <tr>
@@ -32,15 +37,47 @@
         </table>
     </div>
 
-    <!-- Ventana emergente -->
-    <div class="ventana-emergente" id="ventana-emergente">
+    <!-- Ventana emergente para detalles del pedido -->
+    <div class="ventana-emergente" id="ventana-emergente-detalles">
         <div class="ventana-emergente-contenido">
-            <button class="btn-cerrar-ventana">Cerrar</button>
+            <button class="btn-cerrar-ventana-detalles">Cerrar</button>
             <h2>Detalles del pedido</h2>
             <p id="detalle-id">ID: <span></span></p>
             <p id="detalle-cliente">Cliente: <span></span></p>
             <p id="detalle-productos">Productos: <span></span></p>
             <p id="detalle-metodo-pago">Método de pago: <span></span></p>
+            <p id="detalle-total">Total: <span></span></p>
+        </div>
+    </div>
+
+    <!-- Ventana emergente para crear un nuevo pedido -->
+    <div class="ventana-emergente" id="ventana-emergente-crear">
+        <div class="ventana-emergente-contenido">
+            <button class="btn-cerrar-ventana-crear">Cerrar</button>
+            <h2>Crear Nuevo Pedido</h2>
+            <label for="input-id">ID Pedido:</label>
+            <input type="number" id="input-id" required>
+            <label for="input-cliente">Cliente:</label>
+            <input type="text" id="input-cliente" required>
+            <label for="input-productos">Productos:</label>
+            <input type="text" id="input-productos" required>
+            <label for="input-metodo-pago">Método de Pago:</label>
+            <select id="input-metodo-pago" required>
+                <option value="Mercado Pago">Mercado Pago</option>
+                <option value="Efectivo">Efectivo</option>
+            </select>
+            <label for="input-total">Total:</label>
+            <input type="number" id="input-total" required>
+            <button id="crear-pedido">Crear Pedido</button>
+        </div>
+    </div>
+
+    <!-- Ventana emergente para advertencia de ID repetido -->
+    <div class="ventana-emergente" id="ventana-emergente-advertencia">
+        <div class="ventana-emergente-contenido">
+            <button class="btn-cerrar-ventana-advertencia">Cerrar</button>
+            <h2>Advertencia</h2>
+            <p id="advertencia-texto">El número de pedido ya existe.</p>
         </div>
     </div>
 

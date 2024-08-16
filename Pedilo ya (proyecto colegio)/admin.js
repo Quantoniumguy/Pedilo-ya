@@ -9,7 +9,7 @@ const pedidos = [
     },
     {
         id: 2,
-        cliente: 'Nombre y apellido',
+        cliente: 'Eloy Tejero',
         productos: 'Pebete',
         metodoPago: 'Efectivo',
         total: 1500,
@@ -17,7 +17,7 @@ const pedidos = [
     },
     {
         id: 3,
-        cliente: 'Nombre y apellido',
+        cliente: 'Jeremias Leiva',
         productos: 'Medialuna de JyQ',
         metodoPago: 'Mercado Pago',
         total: 500,
@@ -25,7 +25,7 @@ const pedidos = [
     },
     {
         id: 4,
-        cliente: 'Nombre y apellido',
+        cliente: 'Julieta Corti',
         productos: 'Sanguche de Milanesa',
         metodoPago: 'Mercado Pago',
         total: 3000,
@@ -33,7 +33,7 @@ const pedidos = [
     },
     {
         id: 5,
-        cliente: 'Nombre y apellido',
+        cliente: 'Tomas Coch',
         productos: 'Gaseosa 500ml',
         metodoPago: 'Efectivo',
         total: 300,

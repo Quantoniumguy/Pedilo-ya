@@ -118,8 +118,8 @@ h2 {
 }
 
 .detalles {
-    background-color: #ffe600;
-    color: #333;
+    background-color: #b8ab3a;
+    color: rgb(255, 255, 255);
     border: none;
     padding: 10px;
     cursor: pointer;

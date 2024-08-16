@@ -16,8 +16,6 @@ document.getElementById('imagen-producto').addEventListener('change', function(e
     }
 });
 
-
-
 let editando = false;
 let productoEditando = null;
 
@@ -112,8 +110,6 @@ function editarProducto(element) {
     btnGuardar.textContent = 'GUARDAR CAMBIOS';
 }
 
-
-
 function limpiarFormulario() {
     editando = false;
     productoEditando = null;
@@ -136,8 +132,6 @@ function limpiarFormulario() {
 function descartarProducto() {
     limpiarFormulario();
 }
-
-
 
 document.getElementById('btn-descartar-cambios').addEventListener('click', function() {
     // Llama a la función para eliminar todos los productos
@@ -170,3 +164,7 @@ function guardarProductos() {
     localStorage.setItem('productos', JSON.stringify(productos));
     alert('Productos guardados con éxito');
 }
+
+document.querySelector('.btn-cerrar').addEventListener('click', function() {
+    window.close();
+});

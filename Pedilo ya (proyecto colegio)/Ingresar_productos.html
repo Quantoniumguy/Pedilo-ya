@@ -7,11 +7,23 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+        <h1>Pedilo ya</h1>
+        <nav>
+            <ul class="menu">
+                <li><a href="Ingresar_productos.html">Productos</a></li>
+                <li><a href="Administrar_pedidos.html">Pedidos</a></li>
+            </ul>
+        </nav>
+        <button id="btn-cerrar" class="btn-cerrar">Cerrar</button>
+    </header>
+    
+
     <div class="contenedor">
         <header>
             <h1>Ingreso/Edición de productos</h1>
-            <button class="btn btn-stock">INGRESAR STOCK</button>
         </header>
+    </div>
         
         <div class="formulario-producto">
             <div class="formulario-izquierda">
@@ -60,6 +72,15 @@
             <button class="btn btn-descartar-cambios" id="btn-descartar-cambios">DESCARTAR CAMBIOS</button>
         </div>
     </div>
+
+    <!-- Ventana emergente para mensajes de error -->
+    <div class="ventana-emergente" id="ventana-error" style="display: none;">
+        <div class="ventana-emergente-contenido">
+            <p id="mensaje-error"></p>
+            <button onclick="cerrarVentanaError()">Cerrar</button>
+        </div>
+    </div>
+
     <script src="scripts.js"></script>
 </body>
 </html>

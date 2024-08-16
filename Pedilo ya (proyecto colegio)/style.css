@@ -7,30 +7,37 @@ body {
 
 header {
     background-color: #4e85ff;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-    
+    padding: 10px 0;
+    margin-bottom: 20px; /* Agrega un margen inferior para separar los headers */
 }
 
-nav{
-    float: right;
-}
-
-nav ul li a{
-    color: white;
-    font-size: 20px;
-}
-
-nav ul li{
+header .menu {
     list-style: none;
-    margin-left: 25px;
-    float: left;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+}
+
+header .menu li {
+    margin: 0 15px;
+}
+
+header .menu li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+header .menu li a:hover {
+    text-decoration: underline;
 }
 
 header h1 {
     margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
 header .btn-cerrar {
@@ -64,6 +71,10 @@ header .btn-agregar {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1{
+    color: white;
 }
 
 h2 {

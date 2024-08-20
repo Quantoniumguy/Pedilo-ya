@@ -13,16 +13,15 @@ body {
 header {
     background-color: #4e85ff;
     padding: 10px 0;
-    margin-bottom: 20px; /* Agrega un margen inferior para separar los headers */
+    margin-bottom: 20px;
 }
-
 
 header .menu {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center; /* Centra los elementos horizontalmente */
+    justify-content: center;
 }
 
 header .menu li {
@@ -44,9 +43,6 @@ header h1 {
     margin: 0;
     display: flex;
     justify-content: center;
-}
-
-h1{
     color: white;
 }
 
@@ -182,6 +178,9 @@ textarea {
 .item-derecha {
     flex: 4;
     padding-left: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
 }
 
 .icono-editar {
@@ -196,16 +195,12 @@ textarea {
     border-radius: 5px;
     padding: 10px 20px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.btn-guardar-cambios {
-    background-color: #32752a;
-    color: #fff;
-}
-
-.btn-descartar-cambios {
-    background-color: #ff6347;
-    color: #fff;
+.icono-eliminar {
+    flex: 0.5;
+    text-align: center;
 }
 
 .icono-eliminar button {
@@ -215,28 +210,68 @@ textarea {
     border-radius: 5px;
     padding: 10px 20px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .icono-eliminar button:hover {
     background-color: #ff0000;
 }
 
-/* Estilos para la ventana emergente */
-.ventana-emergente {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+.switch-activar {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.ventana-emergente-contenido {
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f76b6b;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
     background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #5ebb56;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Producto inactivo */
+.producto-inactivo {
+    filter: grayscale(50%);
+    opacity: 0.6;
+    border: 2px #ff0000;
 }

@@ -66,6 +66,12 @@ function guardarProducto() {
                     <div class="icono-eliminar">
                         <button onclick="eliminarProducto(this)">Eliminar</button>
                     </div>
+                    <div class="switch-activar">
+                        <label class="switch">
+                            <input type="checkbox" onchange="toggleProductoActivo(this)" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
                 </div>
             `;
             document.querySelector('.lista-productos').insertAdjacentHTML('beforeend', productoHTML);
@@ -138,20 +144,26 @@ function eliminarTodosLosProductos() {
 function guardarProductos() {
     const productos = Array.from(document.querySelectorAll('.item-producto')).map(producto => {
         const imagenUrl = producto.querySelector('.item-izquierda .imagen-placeholder').style.backgroundImage.slice(5, -2);
+        const categoria = producto.querySelector('.item-derecha p:nth-child(1)').textContent.split(': ')[1];
+        const cantidad = producto.querySelector('.item-derecha p:nth-child(2)').textContent.split(': ')[1];
+        const nombre = producto.querySelector('.item-derecha p:nth-child(3)').textContent.split(': ')[1];
+        const precio = producto.querySelector('.item-derecha p:nth-child(4)').textContent.split(': ')[1];
+        const descripcion = producto.querySelector('.item-derecha p:nth-child(5)').textContent.split(': ')[1];
+
         return {
-            categoria: producto.querySelector('.item-derecha p:nth-child(1)').textContent.split(': ')[1],
-            cantidad: producto.querySelector('.item-derecha p:nth-child(2)').textContent.split(': ')[1],
-            nombre: producto.querySelector('.item-derecha p:nth-child(3)').textContent.split(': ')[1],
-            precio: producto.querySelector('.item-derecha p:nth-child(4)').textContent.split(': ')[1],
-            descripcion: producto.querySelector('.item-derecha p:nth-child(5)').textContent.split(': ')[1],
-            imagen: imagenUrl
+            imagenUrl,
+            categoria,
+            cantidad,
+            nombre,
+            precio,
+            descripcion
         };
     });
 
-    localStorage.setItem('productos', JSON.stringify(productos));
-    alert('Productos guardados con éxito');
+    console.log(JSON.stringify(productos));
 }
 
-document.querySelector('.btn-cerrar').addEventListener('click', function() {
-    window.close();
-});
+function toggleProductoActivo(checkbox) {
+    const itemProducto = checkbox.closest('.item-producto');
+    itemProducto.classList.toggle('producto-inactivo', !checkbox.checked);
+}

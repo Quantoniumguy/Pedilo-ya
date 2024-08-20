@@ -83,7 +83,7 @@ function cargarPedidos() {
         });
 
         fila.querySelector('.notificar').addEventListener('click', function() {
-            alert(`Notificación enviada al cliente sobre el pedido ${pedido.id}`);
+            mostrarVentanaNotificar();
         });
 
         tablaPedidos.appendChild(fila);
@@ -112,6 +112,8 @@ function mostrarDetallesPedido(id) {
     }
 }
 
+
+
 // Función para agregar un nuevo pedido
 function agregarPedido(id, cliente, productos, metodoPago, total) {
     const idExistente = pedidos.some(p => p.id === id);
@@ -123,6 +125,15 @@ function agregarPedido(id, cliente, productos, metodoPago, total) {
         document.getElementById('ventana-emergente-crear').style.display = 'none';
     }
 }
+
+function mostrarVentanaNotificar() {
+    document.getElementById('ventana-emergente-notificar').style.display = 'flex';
+}
+
+// Evento para cerrar la ventana emergente de notificación
+document.querySelector('.btn-cerrar-ventana-notificar').addEventListener('click', function() {
+    document.getElementById('ventana-emergente-notificar').style.display = 'none';
+});
 
 // Eventos para cerrar ventanas emergentes
 document.querySelector('.btn-cerrar').addEventListener('click', function() {
@@ -144,6 +155,8 @@ document.querySelector('.btn-cerrar-ventana-crear').addEventListener('click', fu
 document.querySelector('.btn-cerrar-ventana-advertencia').addEventListener('click', function() {
     document.getElementById('ventana-emergente-advertencia').style.display = 'none';
 });
+
+
 
 document.querySelector('#crear-pedido').addEventListener('click', function() {
     const id = parseInt(document.getElementById('input-id').value);

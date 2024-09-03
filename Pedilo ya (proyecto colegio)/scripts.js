@@ -43,7 +43,7 @@ function guardarProducto() {
             productoEditando.querySelector('.item-derecha p:nth-child(1)').innerHTML = `<strong>Categoria:</strong> ${categoria}`;
             productoEditando.querySelector('.item-derecha p:nth-child(2)').innerHTML = `<strong>Cantidad:</strong> ${cantidad} Unidades`;
             productoEditando.querySelector('.item-derecha p:nth-child(3)').innerHTML = `<strong>Nombre:</strong> ${nombre}`;
-            productoEditando.querySelector('.item-derecha p:nth-child(4)').innerHTML = `<strong>Precio: </strong> ${precio}`;
+            productoEditando.querySelector('.item-derecha p:nth-child(4)').innerHTML = `<strong>Precio: </strong> ${precio} Pesos`;
             productoEditando.querySelector('.item-derecha p:nth-child(5)').innerHTML = `<strong>Descripcion:</strong> ${descripcion}`;
         } else {
             // Crear nuevo producto

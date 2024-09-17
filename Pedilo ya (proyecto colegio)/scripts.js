@@ -2,7 +2,7 @@ document.getElementById('imagen-producto').addEventListener('change', function(e
     const fileInput = event.target;
     const imagePlaceholder = document.querySelector('.imagen-placeholder');
     const file = fileInput.files[0];
-    
+
     if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
@@ -19,6 +19,14 @@ document.getElementById('imagen-producto').addEventListener('change', function(e
 let editando = false;
 let productoEditando = null;
 
+// Cargar productos al iniciar la página
+window.onload = function() {
+    const productosGuardados = JSON.parse(localStorage.getItem('productos')) || [];
+    productosGuardados.forEach(producto => {
+        mostrarProductoEnLista(producto);
+    });
+}
+
 function guardarProducto() {
     const categoria = document.getElementById('categoria').value;
     const cantidad = document.getElementById('cantidad').value;
@@ -26,7 +34,7 @@ function guardarProducto() {
     const precio = document.getElementById('precio').value;
     const descripcion = document.getElementById('descripcion').value;
     const imagenProducto = document.getElementById('imagen-producto').files[0];
-    
+
     if (!categoria || !cantidad || !nombre || !precio || !descripcion || (!imagenProducto && !editando)) { 
         alert('Por favor, complete todos los campos.');
         return;
@@ -34,60 +42,78 @@ function guardarProducto() {
 
     const reader = new FileReader();
     reader.onload = function(e) {
+        const producto = {
+            imagenUrl: e.target.result,
+            categoria,
+            cantidad,
+            nombre,
+            precio,
+            descripcion,
+            activo: true // Estado inicial del producto
+        };
+
+        // Almacenar producto en localStorage
+        const productosGuardados = JSON.parse(localStorage.getItem('productos')) || [];
+        
+        // Si se está editando, reemplazar el producto en lugar de agregar uno nuevo
         if (editando && productoEditando) {
-            // Actualizar producto existente
-            const imagePlaceholder = productoEditando.querySelector('.item-izquierda .imagen-placeholder');
-            imagePlaceholder.style.backgroundImage = `url(${e.target.result})`;
-            imagePlaceholder.textContent = '';
-            productoEditando.querySelector('.item-izquierda p').textContent = imagenProducto ? imagenProducto.name : ''; // Actualizar nombre de la imagen
-            productoEditando.querySelector('.item-derecha p:nth-child(1)').innerHTML = `<strong>Categoria:</strong> ${categoria}`;
-            productoEditando.querySelector('.item-derecha p:nth-child(2)').innerHTML = `<strong>Cantidad:</strong> ${cantidad} Unidades`;
-            productoEditando.querySelector('.item-derecha p:nth-child(3)').innerHTML = `<strong>Nombre:</strong> ${nombre}`;
-            productoEditando.querySelector('.item-derecha p:nth-child(4)').innerHTML = `<strong>Precio: </strong> ${precio} Pesos`;
-            productoEditando.querySelector('.item-derecha p:nth-child(5)').innerHTML = `<strong>Descripcion:</strong> ${descripcion}`;
+            const index = productosGuardados.indexOf(productoEditando);
+            if (index !== -1) {
+                productosGuardados[index] = producto; // Reemplazar el producto editado
+            }
         } else {
-            // Crear nuevo producto
-            const productoHTML = `
-                <div class="item-producto">
-                    <div class="item-izquierda">
-                        <div class="imagen-placeholder" style="background-image: url(${e.target.result})">${imagenProducto ? '' : '+'}</div>
-                        <p>${imagenProducto ? imagenProducto.name : ''}</p>
-                    </div>
-                    <div class="item-derecha">
-                        <p><strong>Categoría:</strong> ${categoria}</p>
-                        <p><strong>Cantidad:</strong> ${cantidad} Unidades</p>
-                        <p><strong>Nombre:</strong> ${nombre}</p>
-                        <p><strong>Precio: $</strong> ${precio} Pesos</p>
-                        <p><strong>Descripción:</strong> ${descripcion}</p>
-                    </div>
-                    <div class="icono-editar">
-                        <button onclick="editarProducto(this)">Editar</button">
-                    </div>
-                    <div class="icono-eliminar">
-                        <button onclick="eliminarProducto(this)">Eliminar</button>
-                    </div>
-                    <div class="switch-activar">
-                        <label class="switch">
-                            <input type="checkbox" onchange="toggleProductoActivo(this)" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                </div>
-            `;
-            document.querySelector('.lista-productos').insertAdjacentHTML('beforeend', productoHTML);
+            productosGuardados.push(producto);
         }
+
+        localStorage.setItem('productos', JSON.stringify(productosGuardados));
+
+        // Crear nuevo producto en la vista
+        mostrarProductoEnLista(producto);
         limpiarFormulario();
     };
     if (imagenProducto) {
         reader.readAsDataURL(imagenProducto);
-    } else if (editando && productoEditando) {
-        // Si estamos editando y no se cambia la imagen, usar la imagen existente
-        const imageSrc = productoEditando.querySelector('.item-izquierda img').src;
-        reader.readAsDataURL(imageSrc);
     }
 }
 
+function mostrarProductoEnLista(producto) {
+    const productoHTML = `
+        <div class="item-producto">
+            <div class="item-izquierda">
+                <div class="imagen-placeholder" style="background-image: url(${producto.imagenUrl})">${producto.imagenUrl ? '' : '+'}</div>
+                <p>${producto.nombre}</p>
+            </div>
+            <div class="item-derecha">
+                <p><strong>Categoría:</strong> ${producto.categoria}</p>
+                <p><strong>Cantidad:</strong> ${producto.cantidad} Unidades</p>
+                <p><strong>Precio: $</strong> ${producto.precio} Pesos</p>
+                <p><strong>Descripción:</strong> ${producto.descripcion}</p>
+            </div>
+            <div class="icono-editar">
+                <button onclick="editarProducto(this)">Editar</button>
+            </div>
+            <div class="icono-eliminar">
+                <button onclick="eliminarProducto(this)">Eliminar</button>
+            </div>
+            <div class="switch-activar">
+                <label class="switch">
+                    <input type="checkbox" onchange="toggleProductoActivo(this)" ${producto.activo ? 'checked' : ''}>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    `;
+    document.querySelector('.lista-productos').insertAdjacentHTML('beforeend', productoHTML);
+}
+
 function eliminarProducto(element) {
+    const nombreProducto = element.closest('.item-producto').querySelector('.item-derecha p:nth-child(3)').textContent.split(': ')[1];
+
+    // Eliminar producto de localStorage
+    const productos = JSON.parse(localStorage.getItem('productos')) || [];
+    const nuevosProductos = productos.filter(prod => prod.nombre !== nombreProducto);
+    localStorage.setItem('productos', JSON.stringify(nuevosProductos));
+
     element.closest('.item-producto').remove();
 }
 
@@ -102,7 +128,7 @@ function editarProducto(element) {
     document.getElementById('descripcion').value = producto.querySelector('.item-derecha p:nth-child(5)').textContent.split(': ')[1];
 
     const imagePlaceholder = document.querySelector('.imagen-placeholder');
-    imagePlaceholder.style.backgroundImage = `url(${producto.querySelector('.item-izquierda img').src})`;
+    imagePlaceholder.style.backgroundImage = `url(${producto.querySelector('.imagen-placeholder').style.backgroundImage.slice(5, -2)})`;
     imagePlaceholder.textContent = '';
 
     // Cambiar texto del botón guardar
@@ -132,38 +158,15 @@ function descartarProducto() {
     limpiarFormulario();
 }
 
-function eliminarTodosLosProductos() {
-  
-    const listaProductos = document.querySelector('.lista-productos');
-    
-    listaProductos.innerHTML = '';
-    
-    limpiarFormulario();
-}
-
-function guardarProductos() {
-    const productos = Array.from(document.querySelectorAll('.item-producto')).map(producto => {
-        const imagenUrl = producto.querySelector('.item-izquierda .imagen-placeholder').style.backgroundImage.slice(5, -2);
-        const categoria = producto.querySelector('.item-derecha p:nth-child(1)').textContent.split(': ')[1];
-        const cantidad = producto.querySelector('.item-derecha p:nth-child(2)').textContent.split(': ')[1];
-        const nombre = producto.querySelector('.item-derecha p:nth-child(3)').textContent.split(': ')[1];
-        const precio = producto.querySelector('.item-derecha p:nth-child(4)').textContent.split(': ')[1];
-        const descripcion = producto.querySelector('.item-derecha p:nth-child(5)').textContent.split(': ')[1];
-
-        return {
-            imagenUrl,
-            categoria,
-            cantidad,
-            nombre,
-            precio,
-            descripcion
-        };
-    });
-
-    console.log(JSON.stringify(productos));
-}
-
 function toggleProductoActivo(checkbox) {
     const itemProducto = checkbox.closest('.item-producto');
-    itemProducto.classList.toggle('producto-inactivo', !checkbox.checked);
+    const nombreProducto = itemProducto.querySelector('.item-derecha p:nth-child(3)').textContent.split(': ')[1];
+
+    // Actualizar estado en localStorage
+    const productos = JSON.parse(localStorage.getItem('productos')) || [];
+    const producto = productos.find(prod => prod.nombre === nombreProducto);
+    if (producto) {
+        producto.activo = checkbox.checked;
+    }
+    localStorage.setItem('productos', JSON.stringify(productos));
 }
